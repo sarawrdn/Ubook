@@ -4,7 +4,7 @@ const User = require('../models/user');
 
 //index.js ni macam homepage kot. 
 router.get("/", (req, res) => {
-    res.render("index"); // send index(homepage) refers to index.ejs
+    res.render("index.ejs"); // send index(homepage) refers to index.ejs
    });
 
 // Login Call Front 
@@ -17,6 +17,8 @@ router.post('/login', (req, res, next) => {
 
 //Register Call Front
 router.get('/register', (req, res) => res.render('register.ejs'));
+
+router.get('/details', (req, res) => res.render('bookdetails.ejs'));
 
 //Register API will redirect to login
 

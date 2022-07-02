@@ -8,4 +8,8 @@ const router=express.Router()
 router.get("/",(req,res,next)=>{
     res.render("User/index"); // send index(homepage) refers to index.ejs
 })
+
+router.get("/booklist",(req,res,next)=>{
+    res.render("User/booklist.ejs"); // send index(homepage) refers to index.ejs
+})
 module.exports=router
