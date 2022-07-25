@@ -23,6 +23,15 @@ router.get('/', function(req, res) {
     }
 });
 router.get("/allbook", (req, res) => { res.render("allbook.ejs");});//untuk search nnt display ni
+router.get("/booksearched", (req, res)=>{ 
+    var search=req.query.search;
+    console.log(search);
+    let regex = new RegExp(`^[${search}0-9._-]+$`, "ig");
+    Book.find({title:{$regex: search} }, function(err,buku){
+        console.log(buku);
+        res.render('allbook.ejs', {buku});   
+      });  
+});
 router.get('/login', (req, res) => res.render('login.ejs'));
 router.post('/login', (req, res) => {
 

@@ -120,8 +120,6 @@ router.post('/user/editaccount/:id', function(req, res) {
 });
 
 router.get("/user/allbook", (req, res) => { res.render("User/allbook.ejs");});
-router.get('/user/bookdetails', (req, res) => res.render('User/bookdetails.ejs'));
-
 router.get('/user/addbook', function(req, res) {
     if(req.session.loggedin) {
         if(req.session.isUser)
