@@ -237,5 +237,7 @@ router.get('/user/deletebook/:id', function(req, res) {
     }
   });
 
+  router.get('/user/booklist', (req, res) => res.render('User/booklist.ejs'));
+
 
 module.exports = router;
