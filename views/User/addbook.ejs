@@ -1,3 +1,22 @@
-<html>
-    This is User Add Book Page.
-</html>
+<%- include('userheader'); -%>
+<br><br><br><br><br>
+<div class="login-form-container">
+
+    <form action="/user/addbook" method="post" enctype="multipart/form-data">
+        <h3>Add Book</h3>
+        <span>Upload Image</span>
+        <input type="file" id="image" name="image">
+        <span>Title</span>
+        <input type="text" name="title" class="box" placeholder="Title of Book" id="title">
+        <span>Price</span>
+        <input type="number" name="price" class="box" placeholder="Price of Book" id="price">
+        <span>Category</span>
+        <input type="text" name="category" class="box" placeholder="Category of Book" id="category">
+        <span>Description</span>
+        <input type="textarea" name="description" class="box" placeholder="Category of Book" id="desc">
+        <input type="submit" value="SUBMIT" class="btn">
+    </form>
+
+</div>
+
+

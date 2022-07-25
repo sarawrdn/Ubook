@@ -80,6 +80,28 @@ section{
     cursor: pointer;
     font-weight: 500;
 }
+.btne{
+    margin-top: 1rem;
+    display:inline-block;
+    padding:.9rem 3rem;
+    border-radius: .5rem;
+    color:rgb(252, 249, 249);
+    background:rgb(61, 237, 219);
+    font-size: 1.7rem;
+    cursor: pointer;
+    font-weight: 500;
+}
+.btnd{
+    margin-top: 1rem;
+    display:inline-block;
+    padding:.9rem 3rem;
+    border-radius: .5rem;
+    color:#fff;
+    background:#c03c25;
+    font-size: 1.7rem;
+    cursor: pointer;
+    font-weight: 500;
+}
 
 .btn:hover{
     background:var(--dark-color);
