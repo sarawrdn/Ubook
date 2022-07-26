@@ -101,6 +101,8 @@ router.get('/bookdetails/:id', function(req, res) {
     });
   });
 
+  router.get('/about', (req, res) => res.render('about.ejs'));
+
 /*
 //USER
 router.get('/user/homepage', function(req, res) {
