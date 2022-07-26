@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Complete Responsive Online Boot Store Website Design Tutorial</title>
+    <title>Ubook</title>
 
     <link rel="stylesheet" href="https://unpkg.com/swiper@7/swiper-bundle.min.css" />
 
@@ -22,9 +22,13 @@
   <section class="deal">
 
     <div class="content">
-        <h3><%= buku.title %></h3>
-        <h1>upto 50% off</h1>
-        <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Unde perspiciatis in atque dolore tempora quaerat at fuga dolorum natus velit.</p>
+        <button class="btn"><%= buku.type %></button>
+        <h1><%= buku.title %></h1>       
+        <h3>RM <%= buku.price %></h3>
+        <h3>Category: <%= buku.category %></h3>
+        <h3>Subject: <%= buku.subject%></h3>
+        <h3>University: <%= buku.uni %></h3>
+        <p>Description: <%= buku.description %></p>
         <a href='https://wa.me/<%=info.contact%>' class="btn">Contact Seller (<%=info.name%>)</a>
     </div>
 

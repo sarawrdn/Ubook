@@ -27,7 +27,7 @@ router.get('/user/homepage', function(req, res) {
         if(req.session.isUser)
         {
         console.log("data session dalam ni => ", req.session.email)
-        Book.find({}).exec(function(err,buku){
+        Book.find({status:'Approved'}).exec(function(err,buku){
             console.log(buku);
             res.render('User/index.ejs', {buku});   
         });
@@ -46,7 +46,7 @@ router.get('/user/booksearched', function(req, res) {
             var search=req.query.search;
             console.log(search);
             let regex = new RegExp(`^[${search}0-9._-]+$`, "ig");
-            Book.find({title:{$regex: search} }, function(err,buku){
+            Book.find({title:{$regex: search},status:'Approved' }, function(err,buku){
                 console.log(buku);
                 res.render('User/allbook.ejs', {buku});   
             });  
@@ -136,7 +136,6 @@ router.post('/user/editaccount/:id', function(req, res) {
     }
 });
 
-router.get("/user/allbook", (req, res) => { res.render("User/allbook.ejs");});
 router.get('/user/addbook', function(req, res) {
     if(req.session.loggedin) {
         if(req.session.isUser)

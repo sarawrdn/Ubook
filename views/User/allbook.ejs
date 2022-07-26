@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Complete Responsive Online Boot Store Website Design Tutorial</title>
+    <title>Ubook</title>
 
     <link rel="stylesheet" href="https://unpkg.com/swiper@7/swiper-bundle.min.css" />
 
@@ -25,17 +25,16 @@
     <div class="swiper arrivals-slider">
         <% for(var i=0; i<buku.length;i++) { %>
         <div class="swiper-wrapper">
-            <a href="#" class="swiper-slide box">
+            <a href="/user/bookdetails/<%=buku[i]._id%>" class="swiper-slide box">
                 <div class="image">
-                    <img src="/public/image/book-6.png" alt="">
+                    <img src="/uploads/<%=buku[i].image%>" alt="">
                 </div>
                 <div class="content">
-                    <h3>new arrivals</h3>
-                    <div class="price">$15.99 <span>$20.99</span></div>
-                    <h3>new arrivals</h3>
                     <h3><%= buku[i].title%></h3>
-                    <h3>new arrivalssssssssssssssssssssssssssssssssssssssssssssss</h3>
-                    <h3>new arrivals</h3>
+                    <div class="price">RM <%= buku[i].price%></div><br>
+                    <div class="price">Category: <%= buku[i].category%></div>
+                    <div class="price">Subject: <%= buku[i].subject%></div>
+                    <div class="price">Desciption: <%= buku[i].description%></div>
                 </div>
             </a>
         </div>

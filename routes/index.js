@@ -22,12 +22,11 @@ router.get('/', function(req, res) {
     });
     }
 });
-router.get("/allbook", (req, res) => { res.render("allbook.ejs");});//untuk search nnt display ni
 router.get("/booksearched", (req, res)=>{ 
     var search=req.query.search;
     console.log(search);
     let regex = new RegExp(`^[${search}0-9._-]+$`, "ig");
-    Book.find({$or: [{ title: {$regex: search}}, { category: {$regex: search}},{ description: {$regex: search}}]}, function(err,buku){
+    Book.find({ title: {$regex: search},status:'Approved'}, function(err,buku){
         console.log(buku);
         res.render('allbook.ejs', {buku});   
       });  
@@ -102,56 +101,5 @@ router.get('/bookdetails/:id', function(req, res) {
   });
 
   router.get('/about', (req, res) => res.render('about.ejs'));
-
-/*
-//USER
-router.get('/user/homepage', function(req, res) {
-    if(req.session.loggedin) {
-        console.log("data session dalam ni => ", req.session.email)
-        res.render("User/index.ejs");
-    } else {
-        res.redirect('/login');
-    }
-});
-router.get('/user/logout', function(req, res) {
-
-    if(req.session.loggedin == true) {
-        req.session.loggedin = false;
-        req.session.email = '';
-        req.session.isUser = null;
-    }
-    res.redirect('/login');
-});
-router.get('/user/account', function(req, res) {
-
-    email = req.session.email;
-    if(req.session.loggedin == true) {
-        User.findOne({email}, function(err,info){
-        res.render('User/account.ejs', {info});    
-        });
-    }
-    else
-    {
-    res.redirect('/login');
-    }
-});
-
-
-router.get("/user/allbook", (req, res) => { res.render("User/allbook.ejs");});
-router.get('/user/bookdetails', (req, res) => res.render('User/bookdetails.ejs'));
-router.get("/user/booklist", (req, res) => { res.render("User/booklist.ejs");});
-router.get("/user/addbook", (req, res) => { res.render("User/addbook.ejs");});
-*/
-
-/*
-//ADMIN
-router.get("/admin/homepage", (req, res) => { res.render("Admin/index.ejs");});
-router.get("/admin/account", (req, res) => { res.render("Admin/account.ejs");});
-router.get("/admin/allbook", (req, res) => { res.render("Admin/allbook.ejs");});
-router.get('/admin/bookdetails', (req, res) => res.render('Admin/bookdetails.ejs'));
-router.get('/admin/pendingbooks', (req, res) => res.render('Admin/pendingbook.ejs'));
-router.get('/admin/userlist', (req, res) => res.render('Admin/userlist.ejs'));
-router.get('/admin/edituserlist', (req, res) => res.render('Admin/useraccount.ejs'));
-*/
 
 module.exports = router;
