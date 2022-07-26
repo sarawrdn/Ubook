@@ -22,9 +22,13 @@
   <section class="deal">
 
     <div class="content">
-        <h3><%= buku.title %></h3>
-        <h1>upto 50% off</h1>
-        <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Unde perspiciatis in atque dolore tempora quaerat at fuga dolorum natus velit.</p>
+        <button class="btn"><%= buku.type %></button>
+        <h1><%= buku.title %></h1>       
+        <h3>RM <%= buku.price %></h3>
+        <h3>Category: <%= buku.category %></h3>
+        <h3>Subject: <%= buku.subject%></h3>
+        <h3>University: <%= buku.uni %></h3>
+        <p>Description: <%= buku.description %></p>
         <a onclick="myFunction()" class="btn">Contact Seller</a>
     </div>
 

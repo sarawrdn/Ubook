@@ -16,7 +16,7 @@ router.get('/', function(req, res) {
     }
     else
     {
-        Book.find({}).exec(function(err,buku){
+        Book.find({status:'Approved'}).exec(function(err,buku){
         console.log(buku);
         res.render('index.ejs', {buku});   
     });
@@ -27,7 +27,7 @@ router.get("/booksearched", (req, res)=>{
     var search=req.query.search;
     console.log(search);
     let regex = new RegExp(`^[${search}0-9._-]+$`, "ig");
-    Book.find({title:{$regex: search} }, function(err,buku){
+    Book.find({$or: [{ title: {$regex: search}}, { category: {$regex: search}},{ description: {$regex: search}}]}, function(err,buku){
         console.log(buku);
         res.render('allbook.ejs', {buku});   
       });  

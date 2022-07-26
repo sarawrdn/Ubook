@@ -57,9 +57,72 @@ router.get('/admin/account', function(req, res) {
          res.redirect('/login');
         }
 });
-router.get("/admin/allbook", (req, res) => { res.render("Admin/allbook.ejs");});
-router.get('/admin/bookdetails', (req, res) => res.render('Admin/bookdetails.ejs'));
-router.get('/admin/pendingbooks', (req, res) => res.render('Admin/pendingbook.ejs'));
+router.get('/admin/pendingbooks', function(req, res) {
+
+    if(req.session.loggedin) {
+        if(req.session.isUser === false){
+            Book.find({status:'Pending'}, function(err,buku){
+            console.log('Ini info', buku);
+            res.render('Admin/pendingbook.ejs', {buku});    
+            });
+        }
+    else {res.send('Sorry not authorized');}
+    }
+    else {
+    res.redirect('/login');
+    }
+});
+router.get('/admin/allbooks', function(req, res) {
+
+    if(req.session.loggedin) {
+        if(req.session.isUser === false){
+            Book.find({status:'Approved'}, function(err,buku){
+            console.log('Ini info', buku);
+            res.render('Admin/allbook.ejs', {buku});    
+            });
+        }
+    else {res.send('Sorry not authorized');}
+    }
+    else {
+    res.redirect('/login');
+    }
+});
+router.get('/admin/deletebook/:id', function(req, res) {
+    if(req.session.loggedin) {
+        if(req.session.isUser === false){
+    Book.deleteOne({_id: req.params.id}, function(err) {
+      if(err) {
+        console.log(err);
+      }
+      else {
+        res.redirect("/admin/allbooks");
+      }
+    });
+    } else {res.send('Sorry not authorized');}
+    }
+    else {
+        res.redirect('/login');
+    }
+  });
+router.get('/admin/verifybook/:id', function(req, res) {
+    if(req.session.loggedin) {
+        if(req.session.isUser===false){
+    Book.findByIdAndUpdate(req.params.id, {$set: {status: 'Approved'}},function (err, buku) {
+      if(err) {
+        console.log(err);
+      }
+      else {
+        console.log("Product Uploaded!");
+        res.redirect("/admin/pendingbooks");
+      }
+    });
+    } else {res.send('Sorry not authorized');}
+    }
+    else {
+        res.redirect('/login');
+    }
+  });
+
 router.get('/admin/userlist', function(req, res) {
     if(req.session.loggedin) {
         if(req.session.isUser ===false)
@@ -74,6 +137,22 @@ router.get('/admin/userlist', function(req, res) {
          res.redirect('/login');
         }
 });
-router.get('/admin/edituserlist', (req, res) => res.render('Admin/useraccount.ejs'));
+router.get('/admin/deleteuser/:id', function(req, res) {
+    if(req.session.loggedin) {
+        if(req.session.isUser === false){
+    User.deleteOne({_id: req.params.id}, function(err) {
+      if(err) {
+        console.log(err);
+      }
+      else {
+        res.redirect("/admin/userlist");
+      }
+    });
+    } else {res.send('Sorry not authorized');}
+    }
+    else {
+        res.redirect('/login');
+    }
+  });
 
 module.exports = router;

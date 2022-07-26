@@ -1,3 +1,64 @@
-<html>
-    This is Admin Pending Book Page.
-</html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <script type="text/javascript" src="/public/js/table_script.js"></script>
+
+    <style>
+            table, th, td {
+        border: 1px solid black;
+        font-size: 15pt;
+        border-collapse: collapse;
+        padding: 10px;
+        }
+
+        table.center {
+        margin-left: auto;
+        margin-right: auto;
+}
+      
+    </style>
+
+</head>
+<body>
+    <%- include('adminheader'); -%>
+    <br><br><br><br>
+    
+    <div id="wrapper">
+        <% if(buku.length>0) { %>
+        <table class="center" cellspacing=2 cellpadding=5 id="data_table" style="width:80%">
+        <tr>
+        <th>NO</th>
+        <th style="width:50%">BOOK TITLE</th>
+        <th>STATUS</th>
+        <th>ACTION</th>
+        </tr>
+        <% for(var i=0; i<buku.length;i++) { %>
+        <tr id="row1">
+        <td id="age_row1"><img src="/uploads/<%= buku[i].image%>" alt="" width="100" ></td>
+        <td id="name_row1">
+            Title:<%= buku[i].title%><br>
+            Price: <%= buku[i].price%><br>
+            Category: <%= buku[i].category%><br>
+            Subject: <%= buku[i].subject%><br>
+            Type: <%= buku[i].type%><br>
+            University: <%= buku[i].uni%><br>
+            Description: <%= buku[i].description%>
+        </td>
+        <td id="country_row1"><%= buku[i].status%></td>
+        
+        <td>
+        <form action="/admin/verifybook/<%=buku[i]._id%>" method="get">
+        <input type="submit" class="btn" value="Verifybook">
+        </form>
+        </td>
+        </tr>
+        <% } %> 
+        </table>
+        <% } else { %>
+            <div>No Product found.</div>
+          <% } %>
+        </div>
+        
+    
+    </body>

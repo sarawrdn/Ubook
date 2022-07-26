@@ -14,7 +14,16 @@ const BookSchema = new mongoose.Schema({
   category :{
     type : String
   },
+  type :{
+    type : String
+  },
+  subject :{
+    type : String
+  },
   description :{
+    type : String
+  },
+  uni :{
     type: String
   },
   status:{

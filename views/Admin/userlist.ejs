@@ -32,8 +32,7 @@
                             <td><%= info[i].name%></td>
                             <td><%= info[i].email%></td>
                             <td><%= info[i].contact%></td>
-                            <td><a href="#" class="btne">Edit</a></td>
-                            <td><a href="#" class="btnd">Delete</a></td>  
+                            <td><a href="/admin/deleteuser/<%=info[i]._id%>" class="btnd">Delete</a></td>  
                         </tr>
                         <% } %> 
                         <% } %>

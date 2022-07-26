@@ -16,17 +16,16 @@
 <%- include('header'); -%>
 <br><br><br><br><br>
 <div class="login-form-container">
-
     <form action="/register" method="post">
-        <h3>register</h3>
+        <h3>register</h3>       
         <span>email</span>
-        <input type="email" name="email" class="box" placeholder="enter your email" id="email">
+        <input type="email" name="email" class="box" placeholder="Enter email" id="email" required>
         <span>username</span>
-        <input type="text" name="name" class="box" placeholder="enter new username" id="name">
+        <input type="text" name="name" class="box" placeholder="Enter username" id="name" required>
         <span>password</span>
-        <input type="password" name="password" class="box" placeholder="enter your password" id="password">
-        <input type="submit" value="sign in" class="btn">
-        <p>don't have an account ? <a href="#">create one</a></p>
+        <input type="password" name="password" class="box" placeholder="Enter password" id="password" required minlength="6">
+        <input type="submit" value="sign up" class="btn">
+        <p>Have a account ? <a href="/login">Login</a></p>
     </form>
 
 </div>

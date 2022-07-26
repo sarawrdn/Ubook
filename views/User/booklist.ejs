@@ -23,60 +23,38 @@
 <body>
     <%- include('userheader'); -%>
     <br><br><br><br>
-    
     <div id="wrapper">
+        <% if(buku.length>0) { %>
         <table class="center" cellspacing=2 cellpadding=5 id="data_table" style="width:80%">
         <tr>
         <th>NO</th>
         <th style="width:50%">BOOK TITLE</th>
         <th>STATUS</th>
+        <th>ACTION</th>
         </tr>
-        
-        <tr id="row1">
-        <td id="age_row1">20</td>
-        <td id="name_row1">Ankit</td>
-        <td id="country_row1">India</td>
-        
-        <td>
-        <input type="button" id="edit_button1" value="Edit" class="edit" onclick="edit_row('1')">
-        <input type="button" id="save_button1" value="Save" class="save" onclick="save_row('1')">
-        <input type="button" value="Delete" class="delete" onclick="delete_row('1')">
-        </td>
-        </tr>
-        
-        <tr id="row2">
-        <td id="age_row2">26</td>
-        <td id="name_row2">Shawn</td>
-        <td id="country_row2">Canada</td>
-        
-        <td>
-        <input type="button" id="edit_button2" value="Edit" class="edit" onclick="edit_row('2')">
-        <input type="button" id="save_button2" value="Save" class="save" onclick="save_row('2')">
-        <input type="button" value="Delete" class="delete" onclick="delete_row('2')">
-        </td>
-        </tr>
-        
-        <tr id="row3">
-        <td id="age_row3">19</td>
-        <td id="name_row3">Rahul</td>
-        <td id="country_row3">India</td>
-        
-        <td>
-        <input type="button" id="edit_button3" value="Edit" class="edit" onclick="edit_row('3')">
-        <input type="button" id="save_button3" value="Save" class="save" onclick="save_row('3')">
-        <input type="button" value="Delete" class="delete" onclick="delete_row('3')">
-        </td>
-        </tr>
-        
-        <tr>
-        <td><input type="text" id="new_name"></td>
-        <td><input type="text" id="new_country"></td>
-        <td><input type="text" id="new_age"></td>
-        <td><input type="button" class="add" onclick="add_row();" value="Add Row"></td>
-        </tr>
-        
+             <% for(var i=0; i<buku.length;i++) { %>
+            <tr id="row1">
+                
+                <td id="age_row1"><img src="/uploads/<%=buku[i].image%>" alt="" width="100" ></td>
+                <td id="name_row1">
+                    Title: <%= buku[i].title%><br>
+                    Price: RM <%= buku[i].price%>
+                </td>
+                <td id="country_row1"><%= buku[i].status%></td>
+                <td>
+                <form>
+                <a href="/user/editbook/<%=buku[i]._id%>" class="btn">Edit</a>
+                <a href="/user/deletebook/<%=buku[i]._id%>" class="btnd">Delete</a>
+                </form> 
+                </td> 
+            </tr>
+            <% } %> 
         </table>
-        </div>
-        
-    
+        <% } else { %>
+            <center>
+            <h3>No Book found.</h3>
+            </center>
+          <% } %>
+        </div>      
     </body>
+    

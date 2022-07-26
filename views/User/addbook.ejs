@@ -1,20 +1,29 @@
 <%- include('userheader'); -%>
-<br><br><br><br><br>
+<br><br><br><br><br><br><br><br><br><br><br><br><br>
 <div class="login-form-container">
 
     <form action="/user/addbook" method="post" enctype="multipart/form-data">
         <h3>Add Book</h3>
         <span>Upload Image</span>
-        <input type="file" id="image" name="image">
+        <input type="file" id="image" name="image" required>
         <span>Title</span>
-        <input type="text" name="title" class="box" placeholder="Title of Book" id="title">
+        <input type="text" name="title" class="box" placeholder="Title of Book" id="title" required>
         <span>Price</span>
-        <input type="number" name="price" class="box" placeholder="Price of Book" id="price">
+        <input type="number" name="price" class="box" placeholder="Price of Book" id="price" required>
         <span>Category</span>
-        <input type="text" name="category" class="box" placeholder="Category of Book" id="category">
+        <input type="text" name="category" class="box" placeholder="Category of Book" id="category" required>
+        <span>Subject</span>
+        <input type="text" name="subject" class="box" placeholder="Subject of Book" id="subject" required>
+        <span>University</span>
+        <input type="text" name="uni" class="box" placeholder="University" id="subject" required>
         <span>Description</span>
-        <input type="textarea" name="description" class="box" placeholder="Category of Book" id="desc">
-        <input type="submit" value="SUBMIT" class="btn">
+        <textarea name="description" class="box" placeholder="Description of Book" id="description" required></textarea>
+        <span>Type</span>
+        <input type="radio" id="age1" name="type" value="Used">
+            <label for="age1">USED</label><br>
+        <input type="radio" id="age2" name="type" value="New">
+            <label for="age2">NEW</label><br>  
+        <input type="submit" value="Add Book" class="btn">
     </form>
 
 </div>

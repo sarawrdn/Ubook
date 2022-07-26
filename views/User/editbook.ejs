@@ -1,5 +1,5 @@
 <%- include('userheader'); -%>
-<br><br><br><br><br><br><br><br><br><br><br><br><br>
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 <div class="login-form-container">
     <form action="/user/editbook/<%=buku._id%>" method="post" enctype="multipart/form-data" >
         <h3>Edit Book</h3>
@@ -7,15 +7,19 @@
             <img src="/uploads/<%=buku.image%>" alt="" width="200" >
         </div>
         <span>Update Image</span>
-        <input type="file"  value="<%=buku.image%>" id="image" name="image">
+        <input type="file"  value="<%=buku.image%>" id="image" name="image" required>
         <span>Title</span>
         <input type="text" name="title" class="box" value="<%= buku.title %>" id="title">
         <span>Price</span>
         <input type="number" name="price" class="box" value="<%= buku.price %>" id="price">
         <span>Category</span>
         <input type="text" name="category" class="box" value="<%= buku.category %>" id="category">
+        <span>Subject</span>
+        <input type="text" name="subject" class="box" value="<%= buku.subject %>" id="subject">
+        <span>University</span>
+        <input type="text" name="uni" class="box" value="<%= buku.uni %>" id="uni" required>
         <span>Description</span>
-        <input type="textarea" name="description" class="box" value="<%= buku.description %>" id="desc">
+        <input type="text" name="description" class="box" value="<%= buku.description %>" id="description" required>
         <input type="submit" value="EDIT" class="btn">
     </form>
 

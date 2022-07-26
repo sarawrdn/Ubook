@@ -38,6 +38,25 @@ router.get('/user/homepage', function(req, res) {
         res.redirect('/login');
     }
 });
+router.get('/user/booksearched', function(req, res) {
+
+    if(req.session.loggedin) {
+        if(req.session.isUser)
+        {
+            var search=req.query.search;
+            console.log(search);
+            let regex = new RegExp(`^[${search}0-9._-]+$`, "ig");
+            Book.find({title:{$regex: search} }, function(err,buku){
+                console.log(buku);
+                res.render('User/allbook.ejs', {buku});   
+            });  
+        }
+        else {res.send('Sorry not authorized');}
+        }
+    else {
+         res.redirect('/login');
+        }
+});
 router.get('/user/bookdetails/:id', function(req, res) {
     if(req.session.loggedin) {
         if(req.session.isUser)
@@ -107,9 +126,7 @@ router.post('/user/editaccount/:id', function(req, res) {
                 if (err) {
                   console.log(err);
                 }                  
-                  console.log('User successfully updated =>', info);
                   res.redirect("/user/account");
-                //res.redirect("/users/show/"+product._id);
               });
         }
     else {res.send('Sorry not authorized');}
@@ -124,14 +141,17 @@ router.get('/user/addbook', function(req, res) {
     if(req.session.loggedin) {
         if(req.session.isUser)
         {
-            if(req.session.contact !== null)
+            email = req.session.email;
+            User.findOne({email}, function(err,info){ 
+            if(info.contact !== null)
             {
-             res.render("User/addbook.ejs");
+                res.render("User/addbook.ejs");
             }
             else
             {
-                res.redirect("/user/editaccount");
+                res.redirect("/user/editaccount"); 
             }
+         });
         }
         else {res.send('Sorry not authorized');}
     } 
@@ -148,6 +168,9 @@ router.post('/user/addbook', upload.single('image'), async (req, res) => {
             this.category = req.body.category;
             this.description = req.body.description;
             this.image = req.file.filename;
+            this.subject = req.body.subject;
+            this.uni = req.body.uni;
+            this.type = req.body.type;
 
             const newBook = new Book({
                 title: this.title,
@@ -155,11 +178,15 @@ router.post('/user/addbook', upload.single('image'), async (req, res) => {
                 price : this.price,
                 category : this.category,
                 description : this.description,
+                subject:this.subject,
+                uni:this.uni,
+                type:this.type,
                 status : 'Pending',
                 seller : req.session.email
             });
             newBook.save();
             console.log('Book successfully registered =>', newBook);
+            res.redirect('/user/booklist');
         }
         else {res.send('Sorry not authorized');}
     }
@@ -185,12 +212,12 @@ router.get('/user/editaccount', function(req, res) {
 router.post('/user/editbook/:id',upload.single('image'), function(req, res) {
     if(req.session.loggedin) {
         if(req.session.isUser){
-            Book.findByIdAndUpdate(req.params.id, {$set: req.body, image: req.file.filename},function (err, buku) {
+            Book.findByIdAndUpdate(req.params.id, {$set: req.body, image:req.file.filename},function (err, buku) {
                 if (err) {
                   console.log(err);
                 }                  
                   console.log('User successfully updated =>', buku);
-                //res.redirect("/users/show/"+product._id);
+                  res.redirect('/user/booklist');
               });
         }
     else {res.send('Sorry not authorized');}
@@ -227,7 +254,7 @@ router.get('/user/deletebook/:id', function(req, res) {
       }
       else {
         console.log("Product deleted!");
-        //res.redirect("/user/");
+        res.redirect("/user/booklist");
       }
     });
     } else {res.send('Sorry not authorized');}
@@ -237,7 +264,23 @@ router.get('/user/deletebook/:id', function(req, res) {
     }
   });
 
-  router.get('/user/booklist', (req, res) => res.render('User/booklist.ejs'));
+
+  router.get('/user/booklist', function(req, res) {
+
+    if(req.session.loggedin) {
+        if(req.session.isUser){
+            email = req.session.email;
+            Book.find({seller:email}, function(err,buku){
+            console.log('Ini info', buku);
+            res.render('User/booklist.ejs', {buku});    
+            });
+        }
+    else {res.send('Sorry not authorized');}
+    }
+    else {
+    res.redirect('/login');
+    }
+});
 
 
 module.exports = router;
